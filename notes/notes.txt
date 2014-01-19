@@ -1,0 +1,96 @@
+1. Configure database:
+
+	application/config/database.php
+
+2. Create migration table:
+
+	php artisan migrate:install 
+	=> will create a table named "laravel migrations"
+
+3. Create migration template
+
+	php artisan migrate:make create_users_table 
+	=> will create a file called "2013_12_29_072134_create_users_table.php" in the application/migrations folder
+
+4. Create table using migration template:
+
+	php artisan migrate
+	=> will create the "users" table, based on the definition create at "2013_12_29_072134_create_users_table.php"
+
+5. Rollback the migration:
+
+	php artisan migrate:rollback
+	=> will delete the "users" table
+
+5. Model:
+	
+	- table name: 
+		users
+	
+	- filename: 
+		application/models/user.php
+	
+	- class name: 
+		User
+	
+	- "User" class is extending the"Eloquent" class: 
+		'class User extends Eloquent'
+
+6. Application route:
+
+	- filename: application/routes.php
+
+7. Controller:
+
+	- filename: 
+		application/controllers/users.php
+	
+	- class name: 
+		Users_Controller
+	
+	- "Users_Controller" class is extending the"Base_Controller" class: 
+		'class Users_Controller extends Base_Controller'
+	
+	- controller action: 
+		action_index()
+	
+	- controller routing: 
+		Route::controller('users');
+
+8. Views:
+
+	- location: 
+		application/views
+
+	- folder name:
+		application/views/users
+		=> the same as the controller name
+
+	- filename:
+		application/views/users/index.blade.php
+		=> the same as the controller's action
+
+	- return view:
+		return View::make('users.index');
+		=> from the action_index action
+
+9. Pass data to the view:
+
+	return View::make('users.index')->with('users', $users);
+
+10. Enable RESTful controller:
+
+	- configure RESTful: 
+		application/controllers/base.php
+	
+	- set the $restful properties to 'true':
+		public $restful = true;
+
+	- set the controller's action to use REST:
+		change the action name from action_index to get_index, post_index, put_index or delete_index
+
+
+
+
+
+
